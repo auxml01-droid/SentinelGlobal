@@ -1,9 +1,7 @@
 services:
   - type: web
     name: sentinel-web
-    runtime: image
-    repo: https://github.com/will071988/sentinelglobal
-    branch: main
+    runtime: docker
     dockerfilePath: ./infrastructure/docker/web.Dockerfile
     dockerContext: .
     envVars:
@@ -12,13 +10,11 @@ services:
       - key: NEXT_PUBLIC_WS_URL
         value: wss://sentinel-api.onrender.com
     healthCheckPath: /
-    autoDeploy: true
+    autoDeploy: yes
 
   - type: web
     name: sentinel-api
-    runtime: image
-    repo: https://github.com/will071988/sentinelglobal
-    branch: main
+    runtime: docker
     dockerfilePath: ./infrastructure/docker/api.Dockerfile
     dockerContext: .
     envVars:
@@ -35,13 +31,11 @@ services:
       - key: DATABASE_URL
         sync: false
     healthCheckPath: /public
-    autoDeploy: true
+    autoDeploy: yes
 
   - type: worker
     name: sentinel-worker
-    runtime: image
-    repo: https://github.com/will071988/sentinelglobal
-    branch: main
+    runtime: docker
     dockerfilePath: ./infrastructure/docker/worker.Dockerfile
     dockerContext: .
     envVars:
@@ -55,7 +49,7 @@ services:
           type: redis
           name: sentinel-redis
           property: port
-    autoDeploy: true
+    autoDeploy: yes
 
   - type: redis
     name: sentinel-redis
