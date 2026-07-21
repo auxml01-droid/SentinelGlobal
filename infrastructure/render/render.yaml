@@ -2,7 +2,7 @@ services:
   - type: web
     name: sentinel-web
     runtime: image
-    repo: https://github.com/sentinelglobal/monitoramento
+    repo: https://github.com/will071988/sentinelglobal
     branch: main
     dockerfilePath: ./infrastructure/docker/web.Dockerfile
     dockerContext: .
@@ -17,7 +17,7 @@ services:
   - type: web
     name: sentinel-api
     runtime: image
-    repo: https://github.com/sentinelglobal/monitoramento
+    repo: https://github.com/will071988/sentinelglobal
     branch: main
     dockerfilePath: ./infrastructure/docker/api.Dockerfile
     dockerContext: .
@@ -40,7 +40,7 @@ services:
   - type: worker
     name: sentinel-worker
     runtime: image
-    repo: https://github.com/sentinelglobal/monitoramento
+    repo: https://github.com/will071988/sentinelglobal
     branch: main
     dockerfilePath: ./infrastructure/docker/worker.Dockerfile
     dockerContext: .
