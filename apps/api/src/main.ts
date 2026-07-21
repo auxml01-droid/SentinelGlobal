@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fastify';
 import { AppModule } from './app.module';
+import { startEmbeddedWorker } from './worker-embedded';
 import * as openApiDoc from './openapi.json';
 
 async function bootstrap() {
@@ -32,6 +33,10 @@ async function bootstrap() {
   await app.listen(3001, '0.0.0.0');
   console.log(`🔭 SentinelGlobal API rodando em http://localhost:3001`);
   console.log(`📖 Documentação: http://localhost:3001/public/docs/swagger`);
+
+  if (process.env.EMBEDDED_WORKER === 'true') {
+    startEmbeddedWorker().catch(console.error);
+  }
 }
 
 bootstrap();

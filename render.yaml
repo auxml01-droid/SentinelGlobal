@@ -28,27 +28,13 @@ services:
           type: redis
           name: sentinel-redis
           property: port
-      - key: DATABASE_URL
-        sync: false
+      - key: EMBEDDED_WORKER
+        value: "true"
+      - key: SIMULATION_MODE
+        value: "true"
+      - key: NODE_ENV
+        value: production
     healthCheckPath: /public
-    autoDeploy: yes
-
-  - type: worker
-    name: sentinel-worker
-    runtime: docker
-    dockerfilePath: ./infrastructure/docker/worker.Dockerfile
-    dockerContext: .
-    envVars:
-      - key: REDIS_HOST
-        fromService:
-          type: redis
-          name: sentinel-redis
-          property: host
-      - key: REDIS_PORT
-        fromService:
-          type: redis
-          name: sentinel-redis
-          property: port
     autoDeploy: yes
 
   - type: redis
