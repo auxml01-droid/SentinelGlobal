@@ -1,0 +1,25 @@
+{
+  "name": "@sentinel/notifications",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "tsx watch src/main.ts",
+    "build": "tsc",
+    "start": "node dist/main.js",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@sentinel/notification-engine": "workspace:*",
+    "@sentinel/types": "workspace:*",
+    "ioredis": "^5.4.0",
+    "nodemailer": "^6.9.0",
+    "bullmq": "^5.8.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/nodemailer": "^6.4.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.4.0"
+  }
+}

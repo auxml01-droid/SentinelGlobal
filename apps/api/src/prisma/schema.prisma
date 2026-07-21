@@ -1,0 +1,67 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Event {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  category    String
+  subType     String
+  lat         Float
+  lng         Float
+  locationName String?
+  countryCode String?
+  countryName String?
+  magnitude   Float?
+  depth       Float?
+  fatalities  Int?
+  injured     Int?
+  displaced   Int?
+  affectedArea Float?
+  riskScore   Int      @default(0)
+  riskLevel   Int      @default(1)
+  source      String
+  sourceUrl   String?
+  status      String   @default("active")
+  timestamp   DateTime
+  updatedAt   DateTime @updatedAt
+  metadata    Json?
+}
+
+model CountryRisk {
+  id          String   @id @default(cuid())
+  countryCode String   @unique
+  countryName String
+  score       Int      @default(0)
+  level       Int      @default(1)
+  trend       String   @default("stable")
+  updatedAt   DateTime @updatedAt
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  password  String
+  role      String   @default("user")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model NotificationPreference {
+  id          String   @id @default(cuid())
+  userId      String
+  categories  String[]
+  subTypes    String[]
+  minRiskLevel Int     @default(2)
+  countries   String[]
+  channels    String[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

@@ -1,0 +1,199 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "SentinelGlobal API",
+    "version": "1.0.0",
+    "description": "API pública de monitoramento global de riscos em tempo real. Ideal para integração com empresas, órgãos de defesa civil e aplicativos.",
+    "contact": {
+      "name": "SentinelGlobal",
+      "url": "https://sentinelglobal.io"
+    }
+  },
+  "servers": [
+    { "url": "https://api.sentinelglobal.io/v1", "description": "Produção" },
+    { "url": "http://localhost:3001", "description": "Desenvolvimento" }
+  ],
+  "security": [
+    { "ApiKeyAuth": [] }
+  ],
+  "components": {
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-API-Key",
+        "description": "Chave de API obtida em /api-keys"
+      }
+    },
+    "schemas": {
+      "GlobalEvent": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "title": { "type": "string" },
+          "category": { "type": "string", "enum": ["natural_disaster", "conflict", "tech_risk", "health", "transport"] },
+          "subType": { "type": "string" },
+          "location": { "type": "object", "properties": { "lat": { "type": "number" }, "lng": { "type": "number" } } },
+          "riskScore": { "type": "integer", "minimum": 0, "maximum": 100 },
+          "riskLevel": { "type": "integer", "minimum": 1, "maximum": 6 },
+          "timestamp": { "type": "string", "format": "date-time" }
+        }
+      },
+      "RiskSummary": {
+        "type": "object",
+        "properties": {
+          "globalScore": { "type": "integer" },
+          "globalLevel": { "type": "integer" },
+          "totalEvents": { "type": "integer" },
+          "activeEvents": { "type": "integer" },
+          "countriesMonitored": { "type": "integer" },
+          "topRisks": { "type": "array", "items": { "type": "object", "properties": { "country": { "type": "string" }, "score": { "type": "integer" } } } }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/public": {
+      "get": {
+        "summary": "Informações da API",
+        "tags": ["Público"],
+        "responses": { "200": { "description": "Metadados da API" } }
+      }
+    },
+    "/public/summary": {
+      "get": {
+        "summary": "Resumo global de risco",
+        "tags": ["Público"],
+        "responses": { "200": { "description": "Resumo", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/RiskSummary" } } } } }
+      }
+    },
+    "/public/risk": {
+      "get": {
+        "summary": "Score de risco global atual",
+        "tags": ["Público"],
+        "responses": { "200": { "description": "Score global" } }
+      }
+    },
+    "/public/events": {
+      "get": {
+        "summary": "Listar eventos ativos",
+        "tags": ["Público"],
+        "parameters": [
+          { "name": "category", "in": "query", "schema": { "type": "string" } },
+          { "name": "country", "in": "query", "schema": { "type": "string" } },
+          { "name": "minRisk", "in": "query", "schema": { "type": "integer" } },
+          { "name": "limit", "in": "query", "schema": { "type": "integer", "default": 50 } },
+          { "name": "offset", "in": "query", "schema": { "type": "integer", "default": 0 } }
+        ],
+        "responses": { "200": { "description": "Lista de eventos" } }
+      }
+    },
+    "/public/timeline/{range}": {
+      "get": {
+        "summary": "Timeline de eventos por período",
+        "tags": ["Público"],
+        "parameters": [
+          { "name": "range", "in": "path", "required": true, "schema": { "type": "string", "enum": ["5m", "1h", "24h", "7d", "30d"] } }
+        ],
+        "responses": { "200": { "description": "Eventos no período" } }
+      }
+    },
+    "/public/countries/{code}": {
+      "get": {
+        "summary": "Dados de risco e eventos de um país",
+        "tags": ["Público"],
+        "parameters": [
+          { "name": "code", "in": "path", "required": true, "schema": { "type": "string", "example": "BR" } }
+        ],
+        "responses": { "200": { "description": "Dados do país" } }
+      }
+    },
+    "/webhooks": {
+      "post": {
+        "summary": "Criar webhook para receber eventos",
+        "tags": ["Webhooks"],
+        "security": [{ "ApiKeyAuth": [] }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "url": { "type": "string", "format": "uri" },
+                  "events": { "type": "array", "items": { "type": "string" } },
+                  "minRiskLevel": { "type": "integer", "default": 3 },
+                  "countries": { "type": "array", "items": { "type": "string" } }
+                },
+                "required": ["url", "events"]
+              }
+            }
+          }
+        },
+        "responses": { "201": { "description": "Webhook criado" } }
+      },
+      "get": {
+        "summary": "Listar webhooks",
+        "tags": ["Webhooks"],
+        "security": [{ "ApiKeyAuth": [] }],
+        "responses": { "200": { "description": "Lista de webhooks" } }
+      }
+    },
+    "/ai/query": {
+      "post": {
+        "summary": "Fazer pergunta à IA do SentinelGlobal",
+        "tags": ["IA"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "query": { "type": "string", "example": "Qual o risco geopolítico atual?" }
+                },
+                "required": ["query"]
+              }
+            }
+          }
+        },
+        "responses": { "200": { "description": "Resposta da IA" } }
+      }
+    },
+    "/history/timeline": {
+      "get": {
+        "summary": "Timeline histórica de eventos",
+        "tags": ["Histórico"],
+        "parameters": [
+          { "name": "range", "in": "query", "schema": { "type": "string", "enum": ["5m", "1h", "24h", "7d", "30d"], "default": "1h" } }
+        ],
+        "responses": { "200": { "description": "Pontos da timeline" } }
+      }
+    },
+    "/history/stats": {
+      "get": {
+        "summary": "Estatísticas globais",
+        "tags": ["Histórico"],
+        "responses": { "200": { "description": "Estatísticas por categoria e país" } }
+      }
+    },
+    "/api-keys": {
+      "post": {
+        "summary": "Gerar nova chave de API",
+        "tags": ["API Keys"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" },
+                  "tier": { "type": "string", "enum": ["free", "pro", "enterprise"] }
+                }
+              }
+            }
+          }
+        },
+        "responses": { "201": { "description": "Chave gerada" } }
+      }
+    }
+  }
+}

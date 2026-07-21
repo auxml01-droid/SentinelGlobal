@@ -1,0 +1,64 @@
+services:
+  - type: web
+    name: sentinel-web
+    runtime: image
+    repo: https://github.com/sentinelglobal/monitoramento
+    branch: main
+    dockerfilePath: ./infrastructure/docker/web.Dockerfile
+    dockerContext: .
+    envVars:
+      - key: NEXT_PUBLIC_API_URL
+        value: https://sentinel-api.onrender.com
+      - key: NEXT_PUBLIC_WS_URL
+        value: wss://sentinel-api.onrender.com
+    healthCheckPath: /
+    autoDeploy: true
+
+  - type: web
+    name: sentinel-api
+    runtime: image
+    repo: https://github.com/sentinelglobal/monitoramento
+    branch: main
+    dockerfilePath: ./infrastructure/docker/api.Dockerfile
+    dockerContext: .
+    envVars:
+      - key: REDIS_HOST
+        fromService:
+          type: redis
+          name: sentinel-redis
+          property: host
+      - key: REDIS_PORT
+        fromService:
+          type: redis
+          name: sentinel-redis
+          property: port
+      - key: DATABASE_URL
+        sync: false
+    healthCheckPath: /public
+    autoDeploy: true
+
+  - type: worker
+    name: sentinel-worker
+    runtime: image
+    repo: https://github.com/sentinelglobal/monitoramento
+    branch: main
+    dockerfilePath: ./infrastructure/docker/worker.Dockerfile
+    dockerContext: .
+    envVars:
+      - key: REDIS_HOST
+        fromService:
+          type: redis
+          name: sentinel-redis
+          property: host
+      - key: REDIS_PORT
+        fromService:
+          type: redis
+          name: sentinel-redis
+          property: port
+    autoDeploy: true
+
+  - type: redis
+    name: sentinel-redis
+    plan: free
+    maxmemoryPolicy: allkeys-lru
+    ipAllowList: []

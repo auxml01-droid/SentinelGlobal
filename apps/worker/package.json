@@ -1,0 +1,29 @@
+{
+  "name": "@sentinel/worker",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "tsx watch src/main.ts",
+    "build": "tsc",
+    "start": "node dist/main.js",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@sentinel/ai-engine": "workspace:*",
+    "@sentinel/collectors": "workspace:*",
+    "@sentinel/collector-framework": "workspace:*",
+    "@sentinel/event-bus": "workspace:*",
+    "@sentinel/notification-engine": "workspace:*",
+    "@sentinel/risk-engine": "workspace:*",
+    "@sentinel/shared": "workspace:*",
+    "@sentinel/types": "workspace:*",
+    "bullmq": "^5.8.0",
+    "ioredis": "^5.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.4.0"
+  }
+}
