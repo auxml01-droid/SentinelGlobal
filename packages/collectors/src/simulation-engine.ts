@@ -5,6 +5,7 @@ import {
   EventStatus,
   RiskLevel,
   GeoPoint,
+  CollectorSource,
 } from '@sentinel/types';
 
 interface SimulationConfig {
@@ -150,6 +151,44 @@ export class SimulationEngine {
 
   getConfig(): SimulationConfig {
     return this.config;
+  }
+
+  generateSingle(source: CollectorSource): GlobalEvent[] {
+    const events: GlobalEvent[] = [];
+    const country = COUNTRIES[Math.floor(Math.random() * COUNTRIES.length)]!;
+    const typeDef = EVENT_TYPES[Math.floor(Math.random() * EVENT_TYPES.length)]!;
+    const locations = EVENT_LOCATIONS[country.code] ?? [{ lat: country.lat, lng: country.lng }];
+    const location = locations[Math.floor(Math.random() * locations.length)]!;
+
+    const randomFactor = (Math.random() - 0.5) * 20;
+    const riskScore = Math.min(Math.max(Math.round(typeDef.riskBase + randomFactor), 5), 98);
+
+    const event: GlobalEvent = {
+      id: `sim-fallback-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+      title: typeDef.titleGen(country.name),
+      description: `Evento simulado (fallback) — ${source} — ${country.name}`,
+      category: typeDef.category,
+      subType: typeDef.subType,
+      location: { lat: location.lat + (Math.random() - 0.5) * 0.5, lng: location.lng + (Math.random() - 0.5) * 0.5 },
+      locationName: `${country.name}`,
+      countryCode: country.code,
+      countryName: country.name,
+      impact: {
+        magnitude: typeDef.subType === EventSubType.EARTHQUAKE ? 4 + Math.random() * 4 : undefined,
+        fatalities: Math.random() > 0.7 ? Math.floor(Math.random() * 50) : undefined,
+        affectedArea: Math.floor(Math.random() * 500),
+      },
+      riskScore,
+      riskLevel: Math.min(Math.ceil(riskScore / 20), 6) as RiskLevel,
+      source: 'simulation',
+      timestamp: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      status: EventStatus.CREATED,
+      lifecycle: { created: new Date().toISOString(), updated: new Date().toISOString() },
+    };
+
+    events.push(event);
+    return events;
   }
 
   private generateEvents(): GlobalEvent[] {

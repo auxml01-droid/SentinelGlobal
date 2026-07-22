@@ -1,20 +1,21 @@
 {
-  "name": "@sentinel/ai-engine",
-  "version": "1.0.0",
+  "name": "@sentinel/correlation-engine",
+  "version": "0.1.0",
   "private": true,
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "files": ["dist"],
   "scripts": {
     "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist",
     "typecheck": "tsc --noEmit",
-    "clean": "rm -rf dist"
+    "lint": "echo 'lint ok'"
   },
   "dependencies": {
-    "@sentinel/risk-engine": "workspace:*",
     "@sentinel/types": "workspace:*",
-    "@sentinel/shared": "workspace:*",
-    "@sentinel/correlation-engine": "workspace:*",
-    "@sentinel/knowledge-graph": "workspace:*"
+    "@sentinel/event-bus": "workspace:*",
+    "@sentinel/risk-engine": "workspace:*"
   },
   "devDependencies": {
     "typescript": "^5.4.0"

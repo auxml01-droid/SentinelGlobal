@@ -1,6 +1,6 @@
 import { CollectorManager } from '@sentinel/collectors';
 import { RiskEngine } from '@sentinel/risk-engine';
-import { AIAnalyzer, PredictionEngine } from '@sentinel/ai-engine';
+import { AIAnalyzer, PredictionEngine, IntelligenceEngine } from '@sentinel/ai-engine';
 import { NotificationCenter, NotificationDelivery } from '@sentinel/notification-engine';
 import { RedisEventBus, EventBusChannel } from '@sentinel/event-bus';
 import { GlobalEvent, RiskLevel, WSMessage, WSEventType } from '@sentinel/types';
@@ -24,6 +24,7 @@ export async function startEmbeddedWorker(): Promise<void> {
   const riskEngine = new RiskEngine();
   const aiAnalyzer = new AIAnalyzer(riskEngine);
   const predictionEngine = new PredictionEngine(riskEngine);
+  const intelligenceEngine = new IntelligenceEngine();
   const notificationCenter = new NotificationCenter({});
 
   setupDemoSubscriber(notificationCenter);
@@ -43,6 +44,17 @@ export async function startEmbeddedWorker(): Promise<void> {
         predictions,
         riskScore: event.riskScore,
       });
+    }
+
+    const { correlations, propagations } = intelligenceEngine.processEvent(event);
+    if (correlations.length > 0 || propagations.length > 0) {
+      await broadcastPub.publish('intelligence:update', JSON.stringify({
+        type: 'intelligence',
+        eventId: event.id,
+        correlations: correlations.length,
+        propagations: propagations.length,
+        timestamp: new Date().toISOString(),
+      }));
     }
 
     if (event.riskLevel >= RiskLevel.ALTO_RISCO || event.riskScore >= 60) {
@@ -140,11 +152,16 @@ export async function startEmbeddedWorker(): Promise<void> {
       const ebHealth = await eventBus.health();
       const riskStats = riskEngine.getStats();
       const notifStats = notificationCenter.getStats();
+      const intelligenceStats = {
+        correlations: intelligenceEngine.getCorrelationEngine().getStats(),
+        knowledgeGraph: intelligenceEngine.getKnowledgeGraph().getStats(),
+      };
 
       await broadcastPub.publish('system:status', JSON.stringify({
         eventBus: ebHealth,
         riskEngine: { eventCount: riskStats.total, active: riskStats.active },
         notifications: notifStats,
+        intelligence: intelligenceStats,
         timestamp: new Date().toISOString(),
       }));
     }

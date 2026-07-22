@@ -12,4 +12,5 @@ export * from './agents/prediction-agent.js';
 export * from './central-agent.js';
 export * from './ai-analyzer.js';
 export * from './prediction-engine.js';
+export * from './intelligence-engine.js';
 export * from './types.js';

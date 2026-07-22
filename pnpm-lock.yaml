@@ -47,9 +47,15 @@ importers:
       '@sentinel/collectors':
         specifier: workspace:*
         version: link:../../packages/collectors
+      '@sentinel/correlation-engine':
+        specifier: workspace:*
+        version: link:../../packages/correlation-engine
       '@sentinel/event-bus':
         specifier: workspace:*
         version: link:../../packages/event-bus
+      '@sentinel/knowledge-graph':
+        specifier: workspace:*
+        version: link:../../packages/knowledge-graph
       '@sentinel/notification-engine':
         specifier: workspace:*
         version: link:../../packages/notification-engine
@@ -231,12 +237,28 @@ importers:
 
   packages/ai-engine:
     dependencies:
+      '@sentinel/correlation-engine':
+        specifier: workspace:*
+        version: link:../correlation-engine
+      '@sentinel/knowledge-graph':
+        specifier: workspace:*
+        version: link:../knowledge-graph
       '@sentinel/risk-engine':
         specifier: workspace:*
         version: link:../risk-engine
       '@sentinel/shared':
         specifier: workspace:*
         version: link:../shared
+      '@sentinel/types':
+        specifier: workspace:*
+        version: link:../types
+    devDependencies:
+      typescript:
+        specifier: ^5.4.0
+        version: 5.9.3
+
+  packages/analytics:
+    dependencies:
       '@sentinel/types':
         specifier: workspace:*
         version: link:../types
@@ -284,6 +306,22 @@ importers:
         specifier: ^5.4.0
         version: 5.9.3
 
+  packages/correlation-engine:
+    dependencies:
+      '@sentinel/event-bus':
+        specifier: workspace:*
+        version: link:../event-bus
+      '@sentinel/risk-engine':
+        specifier: workspace:*
+        version: link:../risk-engine
+      '@sentinel/types':
+        specifier: workspace:*
+        version: link:../types
+    devDependencies:
+      typescript:
+        specifier: ^5.4.0
+        version: 5.9.3
+
   packages/event-bus:
     dependencies:
       '@sentinel/types':
@@ -295,6 +333,16 @@ importers:
     devDependencies:
       typescript:
         specifier: ^5.3.3
+        version: 5.9.3
+
+  packages/knowledge-graph:
+    dependencies:
+      '@sentinel/types':
+        specifier: workspace:*
+        version: link:../types
+    devDependencies:
+      typescript:
+        specifier: ^5.4.0
         version: 5.9.3
 
   packages/notification-engine:
@@ -333,6 +381,26 @@ importers:
         version: 1.6.1(@types/node@20.19.43)(terser@5.49.0)
 
   packages/shared:
+    dependencies:
+      '@sentinel/types':
+        specifier: workspace:*
+        version: link:../types
+    devDependencies:
+      typescript:
+        specifier: ^5.4.0
+        version: 5.9.3
+
+  packages/smart-alerts:
+    dependencies:
+      '@sentinel/types':
+        specifier: workspace:*
+        version: link:../types
+    devDependencies:
+      typescript:
+        specifier: ^5.4.0
+        version: 5.9.3
+
+  packages/timeline:
     dependencies:
       '@sentinel/types':
         specifier: workspace:*

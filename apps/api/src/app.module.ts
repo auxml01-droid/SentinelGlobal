@@ -8,6 +8,7 @@ import { ApiKeysModule } from './modules/api-keys/api-keys.module';
 import { PublicModule } from './modules/public/public.module';
 import { HistoryModule } from './modules/history/history.module';
 import { WebhooksModule } from './modules/webhooks/webhooks.module';
+import { IntelligenceModule } from './modules/intelligence/intelligence.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { WebhooksModule } from './modules/webhooks/webhooks.module';
     PublicModule,
     HistoryModule,
     WebhooksModule,
+    IntelligenceModule,
   ],
 })
 export class AppModule {}

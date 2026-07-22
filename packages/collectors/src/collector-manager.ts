@@ -96,6 +96,12 @@ export class CollectorManager {
 
     if (result.success && result.events.length > 0) {
       this.onEvents(result.events);
+    } else if (!result.success && this.useSimulation) {
+      console.log(`⚠️ ${collector.getName()} falhou, usando simulação como fallback`);
+      const simEvents = this.simulationEngine.generateSingle(collector.getSource());
+      if (simEvents.length > 0) {
+        this.onEvents(simEvents);
+      }
     }
   }
 
