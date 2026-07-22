@@ -41,6 +41,18 @@ importers:
       '@sentinel/ai-engine':
         specifier: workspace:*
         version: link:../../packages/ai-engine
+      '@sentinel/collectors':
+        specifier: workspace:*
+        version: link:../../packages/collectors
+      '@sentinel/event-bus':
+        specifier: workspace:*
+        version: link:../../packages/event-bus
+      '@sentinel/notification-engine':
+        specifier: workspace:*
+        version: link:../../packages/notification-engine
+      '@sentinel/risk-engine':
+        specifier: workspace:*
+        version: link:../../packages/risk-engine
       '@sentinel/shared':
         specifier: workspace:*
         version: link:../../packages/shared
