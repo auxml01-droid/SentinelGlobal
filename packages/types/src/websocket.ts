@@ -1,5 +1,5 @@
-import { GlobalEvent } from './event';
-import { GlobalRiskScore } from './risk-level';
+import { GlobalEvent } from './event.js';
+import { GlobalRiskScore } from './risk-level.js';
 
 export enum WSClientType {
   DASHBOARD = 'dashboard',

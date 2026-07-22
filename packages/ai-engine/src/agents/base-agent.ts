@@ -1,5 +1,5 @@
 import { AIAgentType, AIAnalysis, GlobalEvent } from '@sentinel/types';
-import { AgentContext, AgentResult } from '../types';
+import { AgentContext, AgentResult } from '../types.js';
 
 export abstract class BaseAgent {
   public readonly agentType: AIAgentType;

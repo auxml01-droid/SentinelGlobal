@@ -1,6 +1,6 @@
-import { BaseProvider } from './base-provider';
+import { BaseProvider } from './base-provider.js';
 import { NotificationChannel } from '@sentinel/types';
-import { SendParams, SendResult, DiscordConfig } from '../types';
+import { SendParams, SendResult, DiscordConfig } from '../types.js';
 
 export class DiscordProvider extends BaseProvider {
   private config: DiscordConfig;

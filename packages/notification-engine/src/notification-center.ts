@@ -1,6 +1,6 @@
 import { GlobalEvent, NotificationChannel, RiskLevel, EventCategory } from '@sentinel/types';
-import { NotificationManager } from './notification-manager';
-import { NotificationConfig, SendParams, SendResult } from './types';
+import { NotificationManager } from './notification-manager.js';
+import { NotificationConfig, SendParams, SendResult } from './types.js';
 
 export interface NotificationRule {
   id: string;

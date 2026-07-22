@@ -1,6 +1,6 @@
-import { BaseProvider } from './base-provider';
+import { BaseProvider } from './base-provider.js';
 import { NotificationChannel } from '@sentinel/types';
-import { SendParams, SendResult, PushConfig } from '../types';
+import { SendParams, SendResult, PushConfig } from '../types.js';
 
 export class PushProvider extends BaseProvider {
   private config: PushConfig;

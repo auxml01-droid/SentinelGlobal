@@ -1,5 +1,5 @@
 import { GlobalEvent, AIAnalysis, AIQuery, AIResponse, EventCategory, EventSubType, EventStatus, CountryRiskScore } from '@sentinel/types';
-import { CentralAgent } from './central-agent';
+import { CentralAgent } from './central-agent.js';
 import { RiskEngine } from '@sentinel/risk-engine';
 
 export class AIAnalyzer {

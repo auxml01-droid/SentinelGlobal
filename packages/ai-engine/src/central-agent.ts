@@ -1,16 +1,16 @@
 import { AIAgentType, AIAnalysis, GlobalEvent } from '@sentinel/types';
-import { BaseAgent } from './agents/base-agent';
-import { EarthquakeAgent } from './agents/earthquake-agent';
-import { WeatherAgent } from './agents/weather-agent';
-import { WarAgent } from './agents/war-agent';
-import { FireAgent } from './agents/fire-agent';
-import { HealthAgent } from './agents/health-agent';
-import { NuclearAgent } from './agents/nuclear-agent';
-import { CyberAgent } from './agents/cyber-agent';
-import { NewsAgent } from './agents/news-agent';
-import { SatelliteAgent } from './agents/satellite-agent';
-import { PredictionAgent } from './agents/prediction-agent';
-import { AgentContext, CentralAgentResult } from './types';
+import { BaseAgent } from './agents/base-agent.js';
+import { EarthquakeAgent } from './agents/earthquake-agent.js';
+import { WeatherAgent } from './agents/weather-agent.js';
+import { WarAgent } from './agents/war-agent.js';
+import { FireAgent } from './agents/fire-agent.js';
+import { HealthAgent } from './agents/health-agent.js';
+import { NuclearAgent } from './agents/nuclear-agent.js';
+import { CyberAgent } from './agents/cyber-agent.js';
+import { NewsAgent } from './agents/news-agent.js';
+import { SatelliteAgent } from './agents/satellite-agent.js';
+import { PredictionAgent } from './agents/prediction-agent.js';
+import { AgentContext, CentralAgentResult } from './types.js';
 
 export class CentralAgent {
   private agents: BaseAgent[];

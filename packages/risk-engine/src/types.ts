@@ -1,5 +1,5 @@
 import { GlobalEvent, RiskLevel } from '@sentinel/types';
-import { ScoreWeights } from './weighted-scorer';
+import { ScoreWeights } from './weighted-scorer.js';
 
 export interface EngineConfig {
   updateIntervalMs: number;

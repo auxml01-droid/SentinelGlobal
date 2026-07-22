@@ -1,5 +1,5 @@
-import { EventCategory, EventSubType } from './event';
-import { RiskLevel } from './risk-level';
+import { EventCategory, EventSubType } from './event.js';
+import { RiskLevel } from './risk-level.js';
 
 export enum NotificationChannel {
   EMAIL = 'email',

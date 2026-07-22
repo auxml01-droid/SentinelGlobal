@@ -1,6 +1,6 @@
 import { GlobalEvent, CollectorSource } from '@sentinel/types';
 import { EventBus, EventBusChannel } from '@sentinel/event-bus';
-import { BaseCollector, CollectorHealthStatus } from './base-collector';
+import { BaseCollector, CollectorHealthStatus } from './base-collector.js';
 
 export interface OrchestratorConfig {
   eventBus: EventBus;

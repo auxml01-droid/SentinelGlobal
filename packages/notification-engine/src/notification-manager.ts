@@ -1,12 +1,12 @@
 import { NotificationChannel, GlobalEvent, UserNotificationPreferences, RiskLevel } from '@sentinel/types';
-import { NotificationConfig, SendParams, SendResult } from './types';
-import { BaseProvider } from './providers/base-provider';
-import { EmailProvider } from './providers/email-provider';
-import { WhatsAppProvider } from './providers/whatsapp-provider';
-import { PushProvider } from './providers/push-provider';
-import { TelegramProvider } from './providers/telegram-provider';
-import { DiscordProvider } from './providers/discord-provider';
-import { SlackProvider } from './providers/slack-provider';
+import { NotificationConfig, SendParams, SendResult } from './types.js';
+import { BaseProvider } from './providers/base-provider.js';
+import { EmailProvider } from './providers/email-provider.js';
+import { WhatsAppProvider } from './providers/whatsapp-provider.js';
+import { PushProvider } from './providers/push-provider.js';
+import { TelegramProvider } from './providers/telegram-provider.js';
+import { DiscordProvider } from './providers/discord-provider.js';
+import { SlackProvider } from './providers/slack-provider.js';
 
 export class NotificationManager {
   private providers: Map<NotificationChannel, BaseProvider> = new Map();

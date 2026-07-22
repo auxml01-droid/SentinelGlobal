@@ -1,4 +1,4 @@
-import { RiskLevel } from './risk-level';
+import { RiskLevel } from './risk-level.js';
 
 export enum EventCategory {
   NATURAL_DISASTER = 'natural_disaster',

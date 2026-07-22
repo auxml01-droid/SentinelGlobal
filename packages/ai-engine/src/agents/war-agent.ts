@@ -1,6 +1,6 @@
-import { BaseAgent } from './base-agent';
+import { BaseAgent } from './base-agent.js';
 import { AIAgentType, EventSubType } from '@sentinel/types';
-import { AgentContext, AgentResult } from '../types';
+import { AgentContext, AgentResult } from '../types.js';
 
 export class WarAgent extends BaseAgent {
   constructor() {

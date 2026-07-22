@@ -1,6 +1,6 @@
-import { BaseProvider } from './base-provider';
+import { BaseProvider } from './base-provider.js';
 import { NotificationChannel } from '@sentinel/types';
-import { SendParams, SendResult, SlackConfig } from '../types';
+import { SendParams, SendResult, SlackConfig } from '../types.js';
 
 export class SlackProvider extends BaseProvider {
   private config: SlackConfig;

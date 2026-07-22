@@ -1,4 +1,4 @@
-import { EventCategory, EventSubType, GlobalEvent } from './event';
+import { EventCategory, EventSubType, GlobalEvent } from './event.js';
 
 export type CollectorSource =
   | 'usgs'

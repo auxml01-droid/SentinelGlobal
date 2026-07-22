@@ -1,6 +1,6 @@
-import { BaseProvider } from './base-provider';
+import { BaseProvider } from './base-provider.js';
 import { NotificationChannel } from '@sentinel/types';
-import { SendParams, SendResult, WhatsAppConfig } from '../types';
+import { SendParams, SendResult, WhatsAppConfig } from '../types.js';
 
 export class WhatsAppProvider extends BaseProvider {
   private config: WhatsAppConfig;

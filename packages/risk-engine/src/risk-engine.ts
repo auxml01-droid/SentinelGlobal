@@ -1,8 +1,8 @@
 import { GlobalEvent, EventStatus, RiskLevel } from '@sentinel/types';
 import { scoreToRiskLevel } from '@sentinel/shared';
-import { WeightedScorer, CountryWeights } from './weighted-scorer';
-import { EventLifecycleManager } from './lifecycle-manager';
-import { EngineConfig, CountryRiskCalc, RiskCalculationResult, CountryEventHistory } from './types';
+import { WeightedScorer, CountryWeights } from './weighted-scorer.js';
+import { EventLifecycleManager } from './lifecycle-manager.js';
+import { EngineConfig, CountryRiskCalc, RiskCalculationResult, CountryEventHistory } from './types.js';
 
 const DEFAULT_CONFIG: EngineConfig = {
   updateIntervalMs: 5000,

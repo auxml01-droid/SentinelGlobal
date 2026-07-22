@@ -1,4 +1,4 @@
-import { BaseCollector } from './base-collector';
+import { BaseCollector } from './base-collector.js';
 import { CollectorResult, EventCategory, EventSubType, EventStatus, GlobalEvent } from '@sentinel/types';
 
 interface VolcanoReport {

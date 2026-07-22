@@ -1,4 +1,4 @@
-import { BaseCollector } from './base-collector';
+import { BaseCollector } from './base-collector.js';
 import { CollectorResult, EventCategory, EventSubType, GlobalEvent } from '@sentinel/types';
 
 interface EMSCEvent {

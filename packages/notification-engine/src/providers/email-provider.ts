@@ -1,6 +1,6 @@
-import { BaseProvider } from './base-provider';
+import { BaseProvider } from './base-provider.js';
 import { NotificationChannel } from '@sentinel/types';
-import { SendParams, SendResult, EmailConfig } from '../types';
+import { SendParams, SendResult, EmailConfig } from '../types.js';
 import nodemailer from 'nodemailer';
 
 export class EmailProvider extends BaseProvider {

@@ -1,6 +1,6 @@
-import { BaseProvider } from './base-provider';
+import { BaseProvider } from './base-provider.js';
 import { NotificationChannel } from '@sentinel/types';
-import { SendParams, SendResult, TelegramConfig } from '../types';
+import { SendParams, SendResult, TelegramConfig } from '../types.js';
 
 export class TelegramProvider extends BaseProvider {
   private config: TelegramConfig;

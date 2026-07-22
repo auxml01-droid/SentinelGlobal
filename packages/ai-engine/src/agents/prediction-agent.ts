@@ -1,6 +1,6 @@
-import { BaseAgent } from './base-agent';
+import { BaseAgent } from './base-agent.js';
 import { AIAgentType, EventCategory, EventSubType } from '@sentinel/types';
-import { AgentContext, AgentResult } from '../types';
+import { AgentContext, AgentResult } from '../types.js';
 
 export class PredictionAgent extends BaseAgent {
   constructor() {

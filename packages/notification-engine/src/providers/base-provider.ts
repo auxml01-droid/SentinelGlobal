@@ -1,5 +1,5 @@
 import { NotificationChannel } from '@sentinel/types';
-import { SendParams, SendResult } from '../types';
+import { SendParams, SendResult } from '../types.js';
 
 export abstract class BaseProvider {
   public readonly channel: NotificationChannel;

@@ -1,4 +1,4 @@
-import { EventBus, EventBusChannel, EventHandler } from './event-bus';
+import { EventBus, EventBusChannel, EventHandler } from './event-bus.js';
 
 export class InMemoryEventBus implements EventBus {
   private handlers: Map<string, Set<EventHandler>> = new Map();

@@ -1,5 +1,5 @@
 import Redis from 'ioredis';
-import { EventBus, EventBusChannel, EventBusConfig, EventHandler } from './event-bus';
+import { EventBus, EventBusChannel, EventBusConfig, EventHandler } from './event-bus.js';
 
 export class RedisEventBus implements EventBus {
   private pub: Redis;
