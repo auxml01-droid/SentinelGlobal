@@ -6,7 +6,7 @@ import { ApiKeyMiddleware } from './api-key.middleware';
 @Module({
   controllers: [ApiKeysController],
   providers: [ApiKeysService],
-  exports: [ApiKeysService, ApiKeyMiddleware],
+  exports: [ApiKeysService],
 })
 export class ApiKeysModule implements NestModule {
   configure(consumer: MiddlewareConsumer): void {
