@@ -32,7 +32,7 @@ export async function startEmbeddedWorker(): Promise<void> {
   let lastAiRun = 0;
   let lastHealthRun = 0;
 
-  eventBus.subscribe<GlobalEvent>(EventBusChannel.EVENTS_NEW, async (event) => {
+  eventBus.subscribe<GlobalEvent>(EventBusChannel.EVENTS_NEW, async (event: GlobalEvent) => {
     riskEngine.ingestEvent(event);
 
     const predictions = predictionEngine.generatePredictions(event);
@@ -54,11 +54,11 @@ export async function startEmbeddedWorker(): Promise<void> {
     }
   });
 
-  eventBus.subscribe<GlobalEvent>(EventBusChannel.EVENTS_UPDATED, async (event) => {
+  eventBus.subscribe<GlobalEvent>(EventBusChannel.EVENTS_UPDATED, async (event: GlobalEvent) => {
     riskEngine.ingestEvent(event);
   });
 
-  eventBus.subscribe<GlobalEvent>(EventBusChannel.EVENTS_RESOLVED, async (event) => {
+  eventBus.subscribe<GlobalEvent>(EventBusChannel.EVENTS_RESOLVED, async (event: GlobalEvent) => {
     riskEngine.resolveEvent(event.id);
   });
 
