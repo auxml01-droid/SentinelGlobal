@@ -16,6 +16,9 @@ async function bootstrap() {
   });
 
   const httpAdapter = app.getHttpAdapter();
+  httpAdapter.get('/health', (_req: any, res: any) => {
+    res.type('application/json').send({ status: 'ok', timestamp: new Date().toISOString() });
+  });
   httpAdapter.get('/public/docs', (_req: any, res: any) => {
     res.type('application/json').send(openApiDoc);
   });
